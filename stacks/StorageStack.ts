@@ -1,7 +1,8 @@
-import { StackContext, Table } from "sst/constructs";
+import { Bucket, StackContext, Table } from "sst/constructs";
 
 export function StorageStack({ stack }: StackContext) {
-  // Create the DynamoDB table
+  const bucket = new Bucket(stack, "sst-notes-uploads");
+
   const table = new Table(stack, "sst-notes-table", {
     fields: {
       userId: "string",
@@ -11,6 +12,7 @@ export function StorageStack({ stack }: StackContext) {
   });
 
   return {
+    bucket,
     table
   };
 }
